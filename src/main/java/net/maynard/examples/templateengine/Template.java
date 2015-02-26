@@ -1,22 +1,36 @@
 package net.maynard.examples.templateengine;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 /**
  *
  * @author root
  */
 class Template {
 
-    private String variableValue;
+    private Map<String, String> variables;
 
-    public Template(String templateText) {
+    private String templateText;
+
+    public Template(String initialTemplateText) {
+        this.variables = new HashMap<String, String>();
+        this.templateText = initialTemplateText;
     }
 
-    public void set(String variable, String value) {
-        this.variableValue = value;
+    public void set(String name, String value) {
+        this.variables.put(name, value);
     }
 
     public String evaluate() {
-        return "Hello, " + this.variableValue + ".";
+        String result = this.templateText;
+
+        for (Entry<String, String> entry : this.variables.entrySet()) {
+            String regex = "\\$\\{" + entry.getKey() + "\\}";
+            result = result.replaceAll(regex, entry.getValue());
+        }
+
+        return result;
     }
-    
 }
