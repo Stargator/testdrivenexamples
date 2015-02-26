@@ -1,6 +1,8 @@
 package net.maynard.examples.templateengine;
 
 import static org.junit.Assert.assertEquals;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -9,34 +11,28 @@ import org.junit.Test;
  */
 public class TemplateTest {
 
-    @Test
-    final public void oneVariableTest() throws Exception {
-        Template template = new Template("Hello, ${name}.");
-        template.set("name", "Reader");
-        assertEquals("Hello, Reader.", template.evaluate());
-    }
+    private static Template template;
 
-    @Test
-    final public void differentTemplateTest() throws Exception {
-        Template template = new Template("Hi, ${name}.");
-        template.set("name", "someone else");
-        assertEquals("Hi, someone else.", template.evaluate());
-    }
-
-    @Test
-    final public void multipleVariables() throws Exception {
-        Template template = new Template("${one}, ${two}, ${three}");
+    @BeforeClass
+    static public void setUp() throws Exception {
+        template = new Template("${one}, ${two}, ${three}.");
         template.set("one", "1");
         template.set("two", "2");
         template.set("three", "3");
-        assertEquals("1, 2, 3", template.evaluate());
+    }
+
+    @Test
+    final public void multipleAndDifferentVariables() throws Exception {
+        assertTemplateEvaluatesTo("1, 2, 3.");
     }
 
     @Test
     final public void unknownVariablesAreIgnored() throws Exception {
-        Template template = new Template("Hello, ${name}.");
-        template.set("name", "Reader");
-        template.set("doesnotexist", "Hi");
-        assertEquals("Hello, Reader.", template.evaluate());
+        template.set("doesnotexist", "whatever");
+        assertTemplateEvaluatesTo("1, 2, 3.");
+    }
+
+    private void assertTemplateEvaluatesTo(String expected) {
+        assertEquals(expected, template.evaluate());
     }
 }
