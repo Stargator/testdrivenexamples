@@ -3,7 +3,6 @@ package net.maynard.examples.templateengine;
 import net.maynard.examples.templateengine.exceptions.MissingValueException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -15,7 +14,7 @@ import org.junit.Test;
  */
 public class TemplateTest {
 
-    private static Template template;
+    private Template template;
 
     @Before
     public void setUp() throws Exception {
@@ -26,13 +25,22 @@ public class TemplateTest {
     }
 
     @Test
+    public void variablesGetProcessedJustOnce() throws Exception {
+        template.set("one", "${one}");
+        template.set("two", "${three}");
+        template.set("three", "${two}");
+
+        assertTemplateEvaluatesTo("${one}, ${three}, ${two}.");
+    }
+
+    @Test
     public void missingValueRaisesException() throws Exception {
         try {
-            new Template("${foo}").evaluate();
+            new Template("${bar}").evaluate();
             fail("evaluate() should throw an exception if a variable was left "
                     + "without a value!");
         } catch (MissingValueException expected) {
-            assertEquals("No value set for ${foo}", expected.getMessage());
+            assertEquals("No value set for ${bar}", expected.getMessage());
         }
     }
 
