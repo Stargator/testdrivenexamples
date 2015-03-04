@@ -44,12 +44,16 @@ class Template {
         }
     }
 
+//    public void process(Matcher matcher, Entry<String, String> entry) {
+//            matcher.replaceAll(entry.getValue());
+//    }
+
     private String replaceVariablesWithValues() {
         String localTempText = this.templateText;
 
         for (Entry<String, String> entry : this.variables.entrySet()) {
-            String regex = "\\$\\{" + entry.getKey() + "\\}";
-            localTempText = localTempText.replaceAll(regex, entry.getValue());
+            Matcher matcher = Pattern.compile("\\$\\{" + entry.getKey() + "\\}").matcher(localTempText);
+            localTempText = matcher.replaceAll(entry.getValue());
         }
 
         // TODO If result matches templateText it should throw an exception

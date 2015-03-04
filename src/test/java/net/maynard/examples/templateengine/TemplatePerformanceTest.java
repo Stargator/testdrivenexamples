@@ -2,10 +2,14 @@ package net.maynard.examples.templateengine;
 
 import java.io.FileWriter;
 import java.io.IOException;
+//import java.util.Map;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
+//import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -46,6 +50,25 @@ public class TemplatePerformanceTest {
         template.set("20",  "TROUBLESHOOTERS");
     }
 
+    // TODO: Update to improve performance
+//    @Test
+//    public void patternSearchReplaceTest() throws Exception {
+//        long expected = PERFORMANCE_TIME;
+//        String localTempText = templateText;
+//        long time = 1L;
+//
+//        for (Map.Entry<String, String> entry : template.variables.entrySet()) {
+//            Matcher matcher = Pattern.compile("\\$\\{" + entry.getKey() + "\\}").matcher(localTempText);
+//            time = System.currentTimeMillis();
+//            template.evaluate();
+//            time = System.currentTimeMillis() - time;
+//            logTime(time);
+//        }
+//
+//        assertTrue("Rendering template took " + time + "ms, while the target "
+//                + "was " + expected + "ms", time <= expected);
+//    }
+
     @Test
     public void templateWith100WordsAnd20Variables() throws Exception {
         long expected = PERFORMANCE_TIME;
@@ -59,10 +82,10 @@ public class TemplatePerformanceTest {
     }
 
     private void logTime(long time) {
-        String encoding = "utf-8";
+//        String encoding = "utf-8";
         String fullFilePath = "/root/Desktop/GitHub_Projects/timeLog.txt";
 
-        try (   FileWriter fw = new FileWriter(fullFilePath,true);
+        try (   FileWriter fw = new FileWriter(fullFilePath, true);
                 /*FileOutputStream fileOut = new FileOutputStream("/root/Desktop/GitHub_Projects/timeLog.txt");
                 OutputStreamWriter outWriter = new OutputStreamWriter(fileOut, encoding);
                 BufferedWriter writer = new BufferedWriter(outWriter)*/
