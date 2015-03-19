@@ -1,5 +1,6 @@
 package net.maynard.examples.templateengine;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,9 +15,9 @@ import net.maynard.examples.templateengine.exceptions.MissingValueException;
  */
 class Template {
 
-    final private Map<String, String> variables;
-
-    final private String templateText;
+    private Map<String, String> variables;
+    private String templateText;
+    private String evaluatedText;
 
     public Template(String initialTemplateText) {
         this.variables = new HashMap<>();
@@ -32,6 +33,7 @@ class Template {
         // TODO: Make new test to handle if there is no variable set in the template text
 
         checkForMissingValues(result);
+        setEvaluatedText(result);
 
         return result;
     }
@@ -58,5 +60,29 @@ class Template {
 
         // TODO If result matches templateText it should throw an exception
         return localTempText;
+    }
+
+//    public String getTemplateText() {
+//        return this.templateText;
+//    }
+//
+    public void setTemplateText(String newText) {
+        this.templateText = newText;
+    }
+//
+//    public Map<String, String> getVariables() {
+//        return Collections.unmodifiableMap(this.variables);
+//    }
+//
+//    public void setVariables(Map<String, String> newVariables) {
+//        this.variables = newVariables;
+//    }
+//
+    public String getEvaluatedText() {
+        return this.evaluatedText;
+    }
+
+    public void setEvaluatedText(String newEvaluatedText) {
+        this.evaluatedText = newEvaluatedText;
     }
 }

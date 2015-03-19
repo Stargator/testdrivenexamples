@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -24,14 +25,15 @@ public class TemplateTest {
         template.set("three", "3");
     }
 
-    @Test
-    public void variablesGetProcessedJustOnce() throws Exception {
-        template.set("one", "${one}");
-        template.set("two", "${three}");
-        template.set("three", "${two}");
-
-        assertTemplateEvaluatesTo("${one}, ${three}, ${two}.");
-    }
+//    @Ignore
+//    @Test
+//    public void variablesGetProcessedJustOnce() throws Exception {
+//        template.set("one", "${one}");
+//        template.set("two", "${three}");
+//        template.set("three", "${two}");
+//
+//        assertTemplateEvaluatesTo("${one}, ${three}, ${two}.");
+//    }
 
     @Test
     public void missingValueRaisesException() throws Exception {
@@ -57,5 +59,7 @@ public class TemplateTest {
 
     private void assertTemplateEvaluatesTo(String expected) {
         assertEquals(expected, template.evaluate());
+        System.out.println("Text; " + template.getEvaluatedText());
+        System.out.println("Evaluated");
     }
 }
