@@ -31,6 +31,7 @@ public class TemplateTest {
         template.set("one", "${one}");
         template.set("two", "${three}");
         template.set("three", "${two}");
+    }
 
     @Test
     public void missingValueRaisesException() throws Exception {

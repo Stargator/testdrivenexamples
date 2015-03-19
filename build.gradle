@@ -88,7 +88,9 @@ project.version = 0.3
 
 ext {
     encoding = "UTF-8"
+    hamcrestVersion = "1.3+"
     jdkSource = "1.8"
+    junitVersion = "4.12+"
 }
 
 printInfo()
@@ -131,6 +133,7 @@ if (!hasProperty('mainClass')) {
 
 repositories {
     mavenCentral()
+    mavenLocal()
     // You may define additional repositories, or even remove "mavenCentral()".
     // Read more about repositories here:
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
@@ -140,7 +143,10 @@ dependencies {
     // TODO: Add dependencies here ...
     // You can read more about how to add dependency here:
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'junit', name: 'junit', version: junitVersion
+    compile group: 'org.hamcrest', name: 'hamcrest-parent', version: hamcrestVersion
+    compile group: 'org.hamcrest', name: 'hamcrest-core', version: hamcrestVersion
+    compile group: 'org.hamcrest', name: 'hamcrest-library', version: hamcrestVersion
 }
 
 task printProperties << {

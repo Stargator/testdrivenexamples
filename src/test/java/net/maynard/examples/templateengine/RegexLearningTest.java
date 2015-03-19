@@ -1,11 +1,15 @@
 package net.maynard.examples.templateengine;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.not;
+import static net.maynard.examples.templateengine.util.HamcreatAddon.assertThat;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +23,14 @@ public class RegexLearningTest {
 
     @Test
     public void testHowGroupCountWorks() throws Exception {
+        String haystack = "The needle shop sells needles";
+        String regex = "(needle)";
+        Matcher matcher = Pattern.compile(regex).matcher(haystack);
+        assertThat(matcher.groupCount(), not(2));
+    }
+
+    @Test
+    public void testHowGroupCountWorks2() throws Exception {
         String haystack = "The needle shop sells needles, so stop ${asking} ${please}.";
         String firstRegex = "(needle)";
         String secondRegex = "stop";
