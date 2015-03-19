@@ -1,7 +1,122 @@
-apply plugin: 'java'
+apply plugin: 'java' // Adds Java compilation, testing and bundling capabilities to a project. It serves as the basis for many of the other Gradle plugins. See also Chapter 7, Java Quickstart.
+                     // Auto applies java-base
 
-sourceCompatibility = '1.7'
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+// Integration plugins
+//apply plugin: 'application' // Adds tasks for running and bundling a Java project as a command-line application.
+                            // Auto applies java
+//apply plugin: 'ear' // Adds support for building J2EE applications.
+                    // Works with java
+
+//apply plugin: 'jetty' // Deploys your web application to a Jetty web container embedded in the build. See also Chapter 10, Web Application Quickstart.
+                      // Auto applies war
+
+//apply plugin: 'maven' // Adds support for publishing artifacts to Maven repositories.
+                      // Works with java, war
+
+//apply plugin: 'war' // Adds support for assembling web application WAR files. See also Chapter 10, Web Application Quickstart.
+                    // Auto applies java
+
+
+// Software Development Plugins - provides help with your software development process
+//apply plugin: 'announce' // Publish messages to your favourite platforms, such as Twitter or Growl.
+
+//apply plugin: 'build-announcements' // Sends local announcements to your desktop about interesting events in the build lifecycle.
+                                    // Auto applies announce
+
+//apply plugin: 'checkstyle' // Performs quality checks on your project's Java source files using Checkstyle and generates reports from these checks.
+                           // Auto applies java-base
+
+//apply plugin: 'findbugs' // Performs quality checks on your project's Java source files using FindBugs and generates reports from these checks.
+                         // Auto applies java-base
+
+apply plugin: 'idea' // Generates files that are used by Intellij IDEA IDE, thus making it possible to import the project into IDEA.
+                     // Works with java
+
+//apply plugin: 'jdepend' // Performs quality checks on your project's source files using JDepend and generates reports from these checks.
+                        // Auto applies java-base
+
+//apply plugin: 'pmd' // Performs quality checks on your project's Java source files using PMD and generates reports from these checks.
+                    // Auto applies java-base
+
+apply plugin: 'project-report' // Generates reports containing useful information about your Gradle build.
+                               // Auto applies reporting-base
+
+//apply plugin: 'signing' // Adds the ability to digitally sign built files and artifacts.
+                        // Auto applies base
+
+//apply plugin: 'sonar' // Provides integration with the Sonar code quality platform. Superceeded by the sonar-runner plugin.
+                      // Works with java-base, java, jacoco
+
+// Incubating Software Development Plugins
+//apply plugin: 'build-dashboard' // Generates build dashboard report.
+                                // Auto applies reporting-base
+
+apply plugin: 'build-init' // Adds support for initializing a new Gradle build. Handles converting a Maven build to a Gradle build.
+                           // Auto applies wrapper
+
+//apply plugin: 'jacoco' // Provides integration with the JaCoCo code coverage library for Java.
+                       // Auto applies reporting-base
+                       // Works with java
+
+//apply plugin: 'sonar-runner' // Provides integration with the Sonar code quality platform. Supersedes the sonar plugin.
+                             // Works with java-base, java, jacoco
+
+//apply plugin: 'wrapper' // Adds a Wrapper task for generating Gradle wrapper files.
+
+
+
+// Base Plugins
+
+apply plugin: 'base' // Adds the standard lifecycle tasks and configures reasonable defaults for the archive tasks:
+                     // adds build ConfigurationName tasks. Those tasks assemble the artifacts belonging to the specified configuration.
+                     // adds upload ConfigurationName tasks. Those tasks assemble and upload the artifacts belonging to the specified configuration.
+                     // configures reasonable default values for all archive tasks (e.g. tasks that inherit from AbstractArchiveTask). For example, the archive tasks are tasks of types: Jar, Tar, Zip. Specifically, destinationDir, baseName and version properties of the archive tasks are preconfigured with defaults. This is extremely useful because it drives consistency across projects; the consistency regarding naming conventions of archives and their location after the build completed.
+
+//apply plugin: 'java-base' // Adds the source sets concept to the project. Does not add any particular source sets.
+
+//apply plugin: 'reporting-base' // Adds some shared convention properties to the project, relating to report generation.
+
+
+// Third Party Plugins
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Project Details
+
+project.description = "This project is developed as progress is made reading through the Test-Driven book by Lasse Koskela."
+project.group = "net.maynard.examples"
+project.version = 0.3
+
+ext {
+    encoding = "UTF-8"
+    jdkSource = "1.8"
+}
+
+printInfo()
+
+
+void printInfo() {
+    println()
+    println "Project: " + getProject().getName()
+    println "Version: " + getProject().getVersion()
+    println()
+}
+
+sourceSets.all { ext.purpose = null }
+
+sourceSets {
+    main {
+        purpose = "development"
+    }
+    test {
+        purpose = "test"
+    }
+    plugin {
+        purpose = "production"
+    }
+}
+
+sourceCompatibility = jdkSource
+[compileJava, compileTestJava]*.options*.encoding = encoding
 
 // NetBeans will automatically add "run" and "debug" tasks relying on the
 // "mainClass" property. You may however define the property prior executing
@@ -26,4 +141,10 @@ dependencies {
     // You can read more about how to add dependency here:
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task printProperties << {
+    println encoding
+    println jdkSource
+    sourceSets.matching { it.purpose == "production"}.each { println it.name}
 }

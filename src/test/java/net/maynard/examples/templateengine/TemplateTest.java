@@ -25,15 +25,12 @@ public class TemplateTest {
         template.set("three", "3");
     }
 
-//    @Ignore
-//    @Test
-//    public void variablesGetProcessedJustOnce() throws Exception {
-//        template.set("one", "${one}");
-//        template.set("two", "${three}");
-//        template.set("three", "${two}");
-//
-//        assertTemplateEvaluatesTo("${one}, ${three}, ${two}.");
-//    }
+    @Ignore
+    @Test
+    public void variablesGetProcessedJustOnce() throws Exception {
+        template.set("one", "${one}");
+        template.set("two", "${three}");
+        template.set("three", "${two}");
 
     @Test
     public void missingValueRaisesException() throws Exception {
