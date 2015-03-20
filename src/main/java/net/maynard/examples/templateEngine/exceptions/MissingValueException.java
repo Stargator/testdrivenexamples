@@ -1,4 +1,4 @@
-package net.maynard.examples.templateengine.exceptions;
+package net.maynard.examples.templateEngine.exceptions;
 
 /**
  *

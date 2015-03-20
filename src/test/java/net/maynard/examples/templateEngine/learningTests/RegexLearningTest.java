@@ -1,15 +1,16 @@
-package net.maynard.examples.templateengine;
+package net.maynard.examples.templateEngine.learningTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 //import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.hamcrest.Matchers.not;
-import static net.maynard.examples.templateengine.util.HamcrestAddon.assertThat;
+import static net.maynard.examples.templateEngine.util.HamcrestAddon.assertThat;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.maynard.examples.templateEngine.Template;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,12 +31,14 @@ public class RegexLearningTest {
     }
 
     @Test
-    public void testHowGroupCountWorks2() throws Exception {
+    public void testFindStartAndEnd() throws Exception {
         String haystack = "The needle shop sells needles, so stop ${asking} ${please}.";
         String firstRegex = "(needle)";
         String secondRegex = "stop";
         String thirdRegex = "\\$\\{asking}";
         String fourthRegex = "\\$\\{please\\}";
+
+        // First Regex
         Matcher matcher = Pattern.compile(firstRegex).matcher(haystack);
 
         assertTrue(matcher.find());
@@ -48,6 +51,7 @@ public class RegexLearningTest {
 
         assertFalse("Should not have any more matches", matcher.find());
 
+        // Second Regex        
         matcher = Pattern.compile(secondRegex).matcher(haystack);
 
         assertTrue(matcher.find());
@@ -56,6 +60,7 @@ public class RegexLearningTest {
 
         assertFalse("Should not have any more matches", matcher.find());
 
+        // Third Regex
         matcher = Pattern.compile(thirdRegex).matcher(haystack);
 
         assertTrue(matcher.find());
@@ -64,6 +69,7 @@ public class RegexLearningTest {
 
         assertFalse("Should not have any more matches", matcher.find());
 
+        // Fourth Regex
         matcher = Pattern.compile(fourthRegex).matcher(haystack);
 
         assertTrue(matcher.find());

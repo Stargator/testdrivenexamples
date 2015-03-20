@@ -1,21 +1,21 @@
-package net.maynard.examples.templateengine;
+package net.maynard.examples.templateEngine;
 
-import java.util.Collections;
+//import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.maynard.examples.templateengine.exceptions.MissingValueException;
+import net.maynard.examples.templateEngine.exceptions.MissingValueException;
 
 /**
  *
  * @author root
  */
-class Template {
+public class Template {
 
-    private Map<String, String> variables;
+    final private Map<String, String> variables;
     private String templateText;
     private String evaluatedText;
 
@@ -28,6 +28,7 @@ class Template {
         this.variables.put(name, value);
     }
 
+    // Parses the template and then renders the result
     public String evaluate() {
         String result = replaceVariablesWithValues();
         // TODO: Make new test to handle if there is no variable set in the template text

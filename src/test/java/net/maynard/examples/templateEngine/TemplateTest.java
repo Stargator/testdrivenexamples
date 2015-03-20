@@ -1,6 +1,6 @@
-package net.maynard.examples.templateengine;
+package net.maynard.examples.templateEngine;
 
-import net.maynard.examples.templateengine.exceptions.MissingValueException;
+import net.maynard.examples.templateEngine.exceptions.MissingValueException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

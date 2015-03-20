@@ -1,4 +1,4 @@
-package net.maynard.examples.templateengine;
+package net.maynard.examples.templateEngine;
 
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package net.maynard.examples.templateengine.util;
+package net.maynard.examples.templateEngine.util;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
