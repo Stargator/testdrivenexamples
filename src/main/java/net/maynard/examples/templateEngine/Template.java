@@ -46,16 +46,16 @@ public class Template {
 
     private void append(String segment, StringBuilder result) {
         String varStarting = "${";
-        String varEnding = "${";
+        String varEnding = "}";
 
         if (segment.startsWith(varStarting) && segment.endsWith(varEnding)) {
-            String var = segment.substring(varStarting.length(), segment.length() - varEnding.length());
+            String variable = segment.substring(varStarting.length(), segment.length() - varEnding.length());
 
-            if (!variables.containsKey(var)) {
+            if (!variables.containsKey(variable)) {
                 throw new MissingValueException("No value set for " + segment);
             }
 
-            result.append(variables.get(var));
+            result.append(variables.get(variable));
         } else {
             result.append(segment);
         }

@@ -25,12 +25,12 @@ public class TemplateTest {
         template.set("three", "3");
     }
 
-    @Ignore
     @Test
     public void variablesGetProcessedJustOnce() throws Exception {
         template.set("one", "${one}");
         template.set("two", "${three}");
         template.set("three", "${two}");
+        assertTemplateEvaluatesTo("${one}, ${three}, ${two}.");
     }
 
     @Test
@@ -45,14 +45,30 @@ public class TemplateTest {
     }
 
     @Test
-    public void multipleAndDifferentVariables() throws Exception {
+    public void multipleAndDifferentVariables() throws Exception { // Problem, the template text never changed
         assertTemplateEvaluatesTo("1, 2, 3.");
     }
 
     @Test
-    public void unknownVariablesAreIgnored() throws Exception {
+    public void unknownVariablesAreIgnored() throws Exception { // Problem, the template text never changed
         template.set("doesnotexist", "whatever");
         assertTemplateEvaluatesTo("1, 2, 3.");
+    }
+
+    @Test
+    public void emptyTemplateRenderAsEmptyString() throws Exception {
+        String templateStr = "";
+        this.template.setTemplateText(templateStr);
+
+        assertTemplateEvaluatesTo(templateStr);
+    }
+
+    @Test
+    public void templateWithOnlyPlainText() throws Exception {
+        String templateStr = "plain text only";
+        this.template.setTemplateText(templateStr);
+
+        assertTemplateEvaluatesTo(templateStr);
     }
 
     private void assertTemplateEvaluatesTo(String expected) {

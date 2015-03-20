@@ -2,7 +2,6 @@ package net.maynard.examples.templateEngine.learningTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-//import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.hamcrest.Matchers.not;
 import static net.maynard.examples.templateEngine.util.HamcrestAddon.assertThat;
@@ -11,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.maynard.examples.templateEngine.Template;
-import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -81,7 +80,7 @@ public class RegexLearningTest {
 
     @Test
     public void learningTest() {
-        template = new Template("${one}, ${two}, $three");
+        template = new Template("${one}, ${two}, ${three}");
 //        System.out.println("Template; " + template.getTemplateText());
 //        System.out.println("Variables: " + template.getVariables());
 //        System.out.println();
@@ -96,7 +95,7 @@ public class RegexLearningTest {
 //        System.out.println("two");
 //        System.out.println();
 //
-//        template.set("three", "${two}");
+        template.set("three", "$three");
 //        System.out.println("Template; " + template.getTemplateText());
 //        System.out.println("three");
 //        System.out.println();

@@ -21,12 +21,12 @@ public class TemplateParserTest {
     }
 
     @Test
-    public void parsingMultipleVariables() throws Exception {
+    public void parsingMultipleVariables() throws Exception {//Needs Work? Getting IllegalStateException
         String templateStr = "${a}:${b}:${c}";
         processTemplateString(templateStr, "${a}", ":", "${b}", ":", "${c}");
     }
 
-    private void processTemplateString(String templateStr, String... expected) {
+    private void processTemplateString(String templateStr, Object... expected) {
         List<String> segments = parse(templateStr);
         assertSegments(segments, expected);
     }
@@ -38,5 +38,7 @@ public class TemplateParserTest {
     private void assertSegments(List<? extends Object> actual, Object... expected) {
         assertEquals("Number of segments does not match", expected.length, actual.size());
         assertEquals(Arrays.asList(expected), actual);
+        System.out.println("Expected: " + Arrays.asList(expected));
+        System.out.println("Actual  : " + actual);
     }
 }
