@@ -129,16 +129,16 @@ repositories {
     mavenLocal()
 //    maven { url "https://artifactory.agile.pragmatics.com/artifactory/repo" }
 //    maven { url "https://cache.agile.pragmatics.com/artifactory/repo" }
-    maven { url "http://jsptest.sf.net/maven2/" } //Valid
-    maven { url "http://download.java.net/maven/2/" } //Valid
-    maven { url "http://download.java.net/maven/1/" } //Valid
-    maven { url "http://people.apache.org/repo/m2-snapshot-repository" } //Valid, but limited
-    maven { url "http://people.apache.org/repo/m2-incubating-repository" } //Valid, but limited
+//    maven { url "http://jsptest.sf.net/maven2/" } //Valid
+//    maven { url "http://download.java.net/maven/2/" } //Valid
+//    maven { url "http://download.java.net/maven/1/" } //Valid
+//    maven { url "http://people.apache.org/repo/m2-snapshot-repository" } //Valid, but limited
+//    maven { url "http://people.apache.org/repo/m2-incubating-repository" } //Valid, but limited
 //    maven { url "http://www.laughingpanda.org/maven2/" } //Invaliud
-    mavenCentral()
     maven {
         url "http://repo1.maven.org/maven"
     }
+    mavenCentral()
 
     // You may define additional repositories, or even remove "mavenCentral()".
     // Read more about repositories here:
@@ -167,15 +167,15 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-simple', version:'1.7.10'
     compile group: 'commons-dbcp', name: 'commons-dbcp', version:'1.4'
     compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
-    compile(group: 'org.hibernate', name: 'hibernate', version:'5.1.0.Alpha1') {
+    compile(group: 'org.hibernate', name: 'hibernate', version:'3.5.4-Final') {
         exclude(module: 'jta')
     }
     compile group: 'geronimo-spec', name: 'geronimo-spec-jta', version:'1.0.1B-rc4'
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version:'4.3.8.Final'
     compile group: 'javax.ejb', name: 'ejb-api', version:'3.0'
     compile group: 'javax.persistence', name: 'persistence-api', version:'1.0.2'
-    compile group: 'javax.annotation', name: 'jsr250-api', version:'1.0-2050927.133100'
-    compile group: 'org.hibernate', name: 'hibernate-commons-annotations', version:'3.3.0.ga'
+    compile group: 'javax.annotation', name: 'jsr250-api', version:'1.0'
+    compile group: 'org.hibernate', name: 'hibernate-commons-annotations', version:'3.2.0.Final'
     compile(group: 'org.mockejb', name: 'mockejb', version:'0.6-beta2') {
         exclude(module: 'cglib-full')
     }
@@ -183,12 +183,12 @@ dependencies {
     compile group: 'mockobjects', name: 'mockobjects-jdk1.4-j2ee1.3', version:'0.09'
     compile group: 'mockobjects', name: 'mockobjects-jdk1.4', version:'0.09'
     compile group: 'org.springframework', name: 'spring-mock', version:'2.0.8'
-    compile(group: 'org.apache.activemq', name: 'activemq-core', version:'5.7.0.fuse-71-047') {
+    compile(group: 'org.apache.activemq', name: 'activemq-core', version:'5.7.0') {
         exclude(module: 'commons-lang')
     }
-    compile group: 'hsqldb', name: 'hsqldb', version:'1.8.1.1'
+    compile group: 'hsqldb', name: 'hsqldb', version:'1.8.0.10'
     compile group: 'org.netbeans', name: 'jemmy', version:'2.2.7.5'
-    compile group: 'abbot', name: 'abbot', version:'1.0.2'
+    compile group: 'abbot', name: 'abbot', version:'0.12.3'
     compile group: 'gnu-regexp', name: 'gnu-regexp', version:'1.1.4'
     compile(group: 'org.dbunit', name: 'dbunit', version:'2.5.0') {
         exclude(module: 'commons-lang')
