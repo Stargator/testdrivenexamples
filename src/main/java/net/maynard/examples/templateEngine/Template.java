@@ -3,9 +3,6 @@ package net.maynard.examples.templateEngine;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import net.maynard.examples.templateEngine.exceptions.MissingValueException;
 
@@ -18,6 +15,10 @@ public class Template {
     final private Map<String, String> variables;
     private String templateText;
     private String evaluatedText;
+
+    // TODO: Later pull these values from a property/config file
+    final private String varStarting = "${";
+    final private String varEnding = "}";
 
     public Template(String initialTemplateText) {
         this.variables = new HashMap<>();
@@ -32,57 +33,42 @@ public class Template {
     public String evaluate() {
         TemplateParser parser = new TemplateParser();
         List<String> segments = parser.parse(this.templateText);
-        StringBuilder result = new StringBuilder();
+        setEvaluatedText(concatenate(segments));
+
+        return getEvaluatedText();
+    }
+
+    private String concatenate(List<String> segments) {
+        StringBuilder result = new StringBuilder(segments.size());
         // TODO: Make new test to handle if there is no variable set in the template text
 
         for(String segment : segments) {
             append(segment, result);
         }
 
-        setEvaluatedText(result.toString());
-
         return result.toString();
     }
 
     private void append(String segment, StringBuilder result) {
-        String varStarting = "${";
-        String varEnding = "}";
-
-        if (segment.startsWith(varStarting) && segment.endsWith(varEnding)) {
-            String variable = segment.substring(varStarting.length(), segment.length() - varEnding.length());
-
-            if (!variables.containsKey(variable)) {
-                throw new MissingValueException("No value set for " + segment);
-            }
-
-            result.append(variables.get(variable));
+        if (isVariable(segment)) {
+            evaluateVariable(segment, result);
         } else {
             result.append(segment);
         }
     }
 
-    private void checkForMissingValues(String textToCheck) {
-        Matcher matcher = Pattern.compile(".*\\$\\{.+\\}.*").matcher(textToCheck);
-
-        if (matcher.find()) {
-            throw new MissingValueException("No value set for " + matcher.group());
-        }
+    private boolean isVariable(String segment) {
+        return segment.startsWith(varStarting) && segment.endsWith(varEnding);
     }
 
-//    public void process(Matcher matcher, Entry<String, String> entry) {
-//            matcher.replaceAll(entry.getValue());
-//    }
+    private void evaluateVariable(String segment, StringBuilder result) {
+        String variable = segment.substring(varStarting.length(), segment.length() - varEnding.length());
 
-    private String replaceVariablesWithValues() {
-        String localTempText = this.templateText;
-
-        for (Entry<String, String> entry : this.variables.entrySet()) {
-            Matcher matcher = Pattern.compile("\\$\\{" + entry.getKey() + "\\}").matcher(localTempText);
-            localTempText = matcher.replaceAll(entry.getValue());
+        if (!variables.containsKey(variable)) {
+            throw new MissingValueException(segment);
         }
 
-        // TODO If result matches templateText it should throw an exception
-        return localTempText;
+        result.append(variables.get(variable));
     }
 
     public String getTemplateText() {
@@ -92,7 +78,7 @@ public class Template {
     public void setTemplateText(String newText) {
         this.templateText = newText;
     }
-//
+
 //    public Map<String, String> getVariables() {
 //        return Collections.unmodifiableMap(this.variables);
 //    }
@@ -100,7 +86,7 @@ public class Template {
 //    public void setVariables(Map<String, String> newVariables) {
 //        this.variables = newVariables;
 //    }
-//
+
     public String getEvaluatedText() {
         return this.evaluatedText;
     }

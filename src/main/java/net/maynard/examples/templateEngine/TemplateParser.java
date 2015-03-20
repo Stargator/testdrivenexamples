@@ -42,9 +42,6 @@ public class TemplateParser {
     }
 
     private void addPrecedingPlainText(List<String> segments, String template, Matcher matcher, int index) {
-        System.out.println("Index :" + index);
-        System.out.println("Start :" + matcher.start());
-
         if (index != matcher.start()) { // Getting IllegalStateException at matcher.start()
             segments.add(template.substring(index, matcher.start()));
         }

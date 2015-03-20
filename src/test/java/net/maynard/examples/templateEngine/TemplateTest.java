@@ -6,7 +6,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -73,7 +72,5 @@ public class TemplateTest {
 
     private void assertTemplateEvaluatesTo(String expected) {
         assertEquals(expected, template.evaluate());
-        System.out.println("Text; " + template.getEvaluatedText());
-        System.out.println("Evaluated");
     }
 }

@@ -10,7 +10,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.maynard.examples.templateEngine.Template;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -105,7 +104,5 @@ public class RegexLearningTest {
 
     private void assertTemplateEvaluatesTo(String expected) {
         assertEquals(expected, template.evaluate());
-        System.out.println("Text; " + template.getEvaluatedText());
-        System.out.println("Evaluated");
     }
 }

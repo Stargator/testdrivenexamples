@@ -2,14 +2,10 @@ package net.maynard.examples.templateEngine;
 
 import java.io.FileWriter;
 import java.io.IOException;
-//import java.util.Map;
-//import java.util.regex.Matcher;
-//import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
-//import org.junit.Ignore;
 import org.junit.Test;
 
 /**
