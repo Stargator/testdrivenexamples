@@ -1,7 +1,7 @@
 package net.maynard.examples.templateEngine;
 
-//import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -30,13 +30,35 @@ public class Template {
 
     // Parses the template and then renders the result
     public String evaluate() {
-        String result = replaceVariablesWithValues();
+        TemplateParser parser = new TemplateParser();
+        List<String> segments = parser.parse(this.templateText);
+        StringBuilder result = new StringBuilder();
         // TODO: Make new test to handle if there is no variable set in the template text
 
-        checkForMissingValues(result);
-        setEvaluatedText(result);
+        for(String segment : segments) {
+            append(segment, result);
+        }
 
-        return result;
+        setEvaluatedText(result.toString());
+
+        return result.toString();
+    }
+
+    private void append(String segment, StringBuilder result) {
+        String varStarting = "${";
+        String varEnding = "${";
+
+        if (segment.startsWith(varStarting) && segment.endsWith(varEnding)) {
+            String var = segment.substring(varStarting.length(), segment.length() - varEnding.length());
+
+            if (!variables.containsKey(var)) {
+                throw new MissingValueException("No value set for " + segment);
+            }
+
+            result.append(variables.get(var));
+        } else {
+            result.append(segment);
+        }
     }
 
     private void checkForMissingValues(String textToCheck) {
@@ -63,10 +85,10 @@ public class Template {
         return localTempText;
     }
 
-//    public String getTemplateText() {
-//        return this.templateText;
-//    }
-//
+    public String getTemplateText() {
+        return this.templateText;
+    }
+
     public void setTemplateText(String newText) {
         this.templateText = newText;
     }
