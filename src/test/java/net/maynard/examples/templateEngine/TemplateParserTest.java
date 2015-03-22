@@ -9,6 +9,16 @@ import org.junit.Test;
 public class TemplateParserTest {
 
     @Test
+    public void parsingTemplatesIntoSegmentObjects() throws Exception {
+        String templateStr = "a ${b} c ${d}";
+        TemplateParser parser = new TemplateParser();
+        List<Segment> segments = parser.parseSegments(templateStr);
+        assertSegments(segments,
+                new PlainText("a "), new Variable("b"),
+                new PlainText(" c "), new Variable("d"));
+    }
+
+    @Test
     public void emptyTemplateRenderAsEmptyString() throws Exception {
         String templateStr = "";
         processTemplateString(templateStr, templateStr);
@@ -21,7 +31,7 @@ public class TemplateParserTest {
     }
 
     @Test
-    public void parsingMultipleVariables() throws Exception {//Needs Work? Getting IllegalStateException
+    public void parsingMultipleVariables() throws Exception {
         String templateStr = "${a}:${b}:${c}";
         processTemplateString(templateStr, "${a}", ":", "${b}", ":", "${c}");
     }

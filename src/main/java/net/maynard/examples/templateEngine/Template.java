@@ -6,10 +6,7 @@ import java.util.Map;
 
 import net.maynard.examples.templateEngine.exceptions.MissingValueException;
 
-/**
- *
- * @author root
- */
+
 public class Template {
 
     final private Map<String, String> variables;
@@ -17,8 +14,8 @@ public class Template {
     private String evaluatedText;
 
     // TODO: Later pull these values from a property/config file
-    final private String varStarting = "${";
-    final private String varEnding = "}";
+    final static private String varStarting = "${";
+    final static private String varEnding = "}";
 
     public Template(String initialTemplateText) {
         this.variables = new HashMap<>();
@@ -57,7 +54,7 @@ public class Template {
         }
     }
 
-    private boolean isVariable(String segment) {
+    public static boolean isVariable(String segment) {
         return segment.startsWith(varStarting) && segment.endsWith(varEnding);
     }
 

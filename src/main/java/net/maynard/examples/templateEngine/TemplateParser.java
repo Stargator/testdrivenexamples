@@ -41,6 +41,11 @@ public class TemplateParser {
         segments.add(template.substring(matcher.start(), matcher.end()));
     }
 
+    private void addVariable(List<Segment> segments, String variableStr) {
+        String newVar = variableStr.substring(2, variableStr.length() - 1);
+        segments.add(new Variable(newVar));
+    }
+
     private void addPrecedingPlainText(List<String> segments, String template, Matcher matcher, int index) {
         if (index != matcher.start()) { // Getting IllegalStateException at matcher.start()
             segments.add(template.substring(index, matcher.start()));
@@ -52,4 +57,20 @@ public class TemplateParser {
             segments.add("");
         }
     }
+
+    public List<Segment> parseSegments(String template) {
+        List<Segment> segments = new ArrayList<>();
+        List<String> strings = parse(template);
+
+        for(String str : strings) {
+            if (Template.isVariable(str)) {
+                addVariable(segments, str);
+            } else {
+                segments.add(new PlainText(str));
+            }
+        }
+
+        return segments;
+    }
+
 }
