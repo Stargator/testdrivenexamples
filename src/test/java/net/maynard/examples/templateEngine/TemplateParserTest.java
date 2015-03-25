@@ -21,28 +21,39 @@ public class TemplateParserTest {
     @Test
     public void emptyTemplateRenderAsEmptyString() throws Exception {
         String templateStr = "";
-        processTemplateString(templateStr, templateStr);
+        PlainText expected = new PlainText(templateStr);
+        processTemplateString(templateStr, expected);
     }
 
     @Test
     public void templateWithOnlyPlainText() throws Exception {
         String templateStr = "plain text only";
-        processTemplateString(templateStr, templateStr);
+        PlainText expected = new PlainText(templateStr);
+        processTemplateString(templateStr, expected);
     }
 
     @Test
     public void parsingMultipleVariables() throws Exception {
         String templateStr = "${a}:${b}:${c}";
-        processTemplateString(templateStr, "${a}", ":", "${b}", ":", "${c}");
+        Variable firstExpected = new Variable("a");
+        PlainText secondExpected = new PlainText(":");
+        Variable thirdExpected = new Variable("b");
+        PlainText fourthExpected = new PlainText(":");
+        Variable fifthExpected = new Variable("c");
+
+        processTemplateString(templateStr,
+                firstExpected, secondExpected,
+                thirdExpected, fourthExpected,
+                fifthExpected);
     }
 
     private void processTemplateString(String templateStr, Object... expected) {
-        List<String> segments = parse(templateStr);
+        List<Segment> segments = parse(templateStr);
         assertSegments(segments, expected);
     }
 
-    private List<String> parse(String template) {
-        return new TemplateParser().parse(template);
+    private List<Segment> parse(String template) {
+        return new TemplateParser().parseSegments(template);
     }
 
     private void assertSegments(List<? extends Object> actual, Object... expected) {

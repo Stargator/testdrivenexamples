@@ -13,7 +13,7 @@ public class TemplateParser {
     final private String varStarting = Config.varStarting;
     final private String varEnding = Config.varEnding;
 
-    public List<String> parse(String template) {
+    private List<String> parse(String template) {
         List<String> segments = new ArrayList<>();
         int index = collectSegments(segments, template);
 
