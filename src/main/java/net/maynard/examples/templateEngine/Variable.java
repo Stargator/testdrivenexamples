@@ -14,11 +14,13 @@ public class Variable implements Segment {
 
     @Override
     public String evaluate(Map<String, String> variables) {
-        if (!variables.containsKey(name)) {
-            throw new MissingValueException(name);
+        String currName = getName();
+
+        if (!variables.containsKey(currName)) {
+            throw new MissingValueException(currName);
         }
 
-        return variables.get(name);
+        return variables.get(currName);
     }
 
     public String getName() {
@@ -34,7 +36,7 @@ public class Variable implements Segment {
         boolean outcome = false;
 
         if (other != null && other.getClass() == this.getClass()) {
-            if (Objects.equals(this.name, ((Variable) other).name)) {
+            if (Objects.equals(getName(), ((Variable) other).name)) {
                 outcome = true;
             }
         }
@@ -45,7 +47,7 @@ public class Variable implements Segment {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.name);
+        hash = 89 * hash + Objects.hashCode(getName());
         return hash;
     }
 }

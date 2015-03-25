@@ -1,11 +1,17 @@
 package net.maynard.examples.templateEngine;
 
+import net.maynard.examples.templateEngine.util.Config;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TemplateParser {
+
+    // TODO: Later pull these values from a property/config file
+    final private String varStarting = Config.varStarting;
+    final private String varEnding = Config.varEnding;
 
     public List<String> parse(String template) {
         List<String> segments = new ArrayList<>();
@@ -63,7 +69,7 @@ public class TemplateParser {
         List<String> strings = parse(template);
 
         for(String str : strings) {
-            if (Template.isVariable(str)) {
+            if (isVariable(str)) {
                 addVariable(segments, str);
             } else {
                 segments.add(new PlainText(str));
@@ -73,4 +79,7 @@ public class TemplateParser {
         return segments;
     }
 
+    private boolean isVariable(String segment) {
+        return segment.startsWith(varStarting) && segment.endsWith(varEnding);
+    }
 }

@@ -5,39 +5,49 @@ import java.util.Map;
 
 import com.gargoylesoftware.base.testing.EqualsTester;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import net.maynard.examples.templateEngine.exceptions.MissingValueException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class VariableSegmentTest {
 
     private Map<String, String> variables;
-    private String name = "myvar";
+    private String name;
+    private String value;
 
     @Before
-    public void setup() {
+    public void setUp() {
         variables = new HashMap<>();
         name = "myvar";
     }
 
+    @After
+    public void tearDown() {
+        variables = null;
+        name = null;
+        value = null;
+    }
+
     @Test
     public void variableEvaluatesToItsValue() throws Exception {
-        Map<String, String> variables = new HashMap<>();
-        String name = "myvar";
-        String value = "myvalue";
+        value = "myvalue";
         variables.put(name, value);
 
         assertEquals(value, new Variable(name).evaluate(variables));
     }
 
-//    @Test
-//    public void missingVariableRaisesException() throws Exception {
-//        try {
-//            new Variable(name).evaluate(variables);
-//            fail("Missing variable value should raise an exception");
-//        } catch (MissingValueException expected) {
-//            assertEquals("No value set for ${" + name + "}", expected.getMessage());
-//        }
-//    }
+    @Test
+    public void missingVariableRaisesException() throws Exception {
+        try {
+            new Variable(name).evaluate(variables);
+            fail("Missing variable value should raise an exception");
+        } catch (MissingValueException expected) {
+            assertEquals("No value set for ${" + name + "}", expected.getMessage());
+        }
+    }
 
     @Test
     public void testEqualsAndHashCode() {

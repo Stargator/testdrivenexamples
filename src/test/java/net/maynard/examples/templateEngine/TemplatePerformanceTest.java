@@ -5,13 +5,10 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
 
+import net.maynard.examples.templateEngine.util.Config;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author root
- */
 public class TemplatePerformanceTest {
 
     private Template template;
@@ -79,7 +76,8 @@ public class TemplatePerformanceTest {
 
     private void logTime(long time) {
 //        String encoding = "utf-8";
-        String fullFilePath = "/root/Desktop/GitHub_Projects/timeLog.txt";
+        //TODO: Get From Config Property file
+        String fullFilePath = Config.logFileLocation;
 
         try (   FileWriter fw = new FileWriter(fullFilePath, true);
                 /*FileOutputStream fileOut = new FileOutputStream("/root/Desktop/GitHub_Projects/timeLog.txt");

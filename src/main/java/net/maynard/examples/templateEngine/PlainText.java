@@ -12,7 +12,7 @@ public class PlainText implements Segment {
 
     @Override
     public String evaluate(Map<String, String> variables) {
-        return this.text;
+        return getText();
     }
 
     public String getText() {
@@ -28,7 +28,7 @@ public class PlainText implements Segment {
         boolean outcome = false;
 
         if (other != null && other.getClass() == this.getClass()) {
-            if (Objects.equals(this.text, ((PlainText) other).text)) {
+            if (Objects.equals(getText(), ((PlainText) other).text)) {
                 outcome = true;
             }
         }
@@ -39,7 +39,7 @@ public class PlainText implements Segment {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.text);
+        hash = 13 * hash + Objects.hashCode(getText());
         return hash;
     }
 }

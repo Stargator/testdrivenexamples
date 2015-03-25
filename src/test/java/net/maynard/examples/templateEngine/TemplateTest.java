@@ -8,10 +8,6 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author Stargator
- */
 public class TemplateTest {
 
     private Template template;
