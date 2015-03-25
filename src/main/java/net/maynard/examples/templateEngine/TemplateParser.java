@@ -17,7 +17,7 @@ public class TemplateParser {
         List<String> segments = new ArrayList<>();
         int index = collectSegments(segments, template);
 
-        addTail(segments, template, index);
+        addTailingSegment(segments, template, index);
         addEmptyStringIfTemplateWasEmpty(segments);
 
         return segments;
@@ -37,9 +37,9 @@ public class TemplateParser {
         return index;
     }
 
-    private void addTail(List<String> segments, String template, int index) {
-        if (index < template.length()) {
-            segments.add(template.substring(index));
+    private void addTailingSegment(List<String> segments, String str, int index) {
+        if (index < str.length()) {
+            segments.add(str.substring(index));
         }
     }
 
@@ -48,12 +48,12 @@ public class TemplateParser {
     }
 
     private void addVariable(List<Segment> segments, String variableStr) {
-        String newVar = variableStr.substring(2, variableStr.length() - 1);
+        String newVar = variableStr.substring(varStarting.length(), variableStr.length() - varEnding.length());
         segments.add(new Variable(newVar));
     }
 
     private void addPrecedingPlainText(List<String> segments, String template, Matcher matcher, int index) {
-        if (index != matcher.start()) { // Getting IllegalStateException at matcher.start()
+        if (index != matcher.start()) {
             segments.add(template.substring(index, matcher.start()));
         }
     }
@@ -79,7 +79,7 @@ public class TemplateParser {
         return segments;
     }
 
-    private boolean isVariable(String segment) {
-        return segment.startsWith(varStarting) && segment.endsWith(varEnding);
+    private boolean isVariable(String string) {
+        return string.startsWith(varStarting) && string.endsWith(varEnding);
     }
 }
