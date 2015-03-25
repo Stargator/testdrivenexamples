@@ -29,18 +29,18 @@ public class Template {
     // Parses the template and then renders the result
     public String evaluate() {
         TemplateParser parser = new TemplateParser();
-        List<String> segments = parser.parse(this.templateText);
+        List<Segment> segments = parser.parseSegments(this.templateText);
         setEvaluatedText(concatenate(segments));
 
         return getEvaluatedText();
     }
 
-    private String concatenate(List<String> segments) {
+    private String concatenate(List<Segment> segments) {
         StringBuilder result = new StringBuilder(segments.size());
         // TODO: Make new test to handle if there is no variable set in the template text
 
-        for(String segment : segments) {
-            append(segment, result);
+        for(Segment segment : segments) {
+            result.append(segment.evaluate(this.variables));
         }
 
         return result.toString();
