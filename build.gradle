@@ -150,8 +150,8 @@ dependencies {
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
     testCompile group: 'junit', name: 'junit', version: junitVersion
     testCompile group: 'gsbase', name: 'gsbase', version: "2.0.1"
-    compile group: 'org.hamcrest', name: 'hamcrest-core', version: hamcrestVersion
-    compile group: 'org.hamcrest', name: 'hamcrest-library', version: hamcrestVersion
+    testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: hamcrestVersion
+    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: hamcrestVersion
 
     // From Author's Source:
     compile(group: 'org.apache.velocity', name: 'velocity', version:'1.7') {
