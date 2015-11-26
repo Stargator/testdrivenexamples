@@ -59,7 +59,7 @@ public class TemplateParserTest {
     private void assertSegments(List<? extends Object> actual, Object... expected) {
         assertEquals("Number of segments does not match", expected.length, actual.size());
         assertEquals(Arrays.asList(expected), actual);
-        System.out.println("Expected: " + Arrays.asList(expected));
-        System.out.println("Actual  : " + actual);
+//        System.out.println("Expected: " + Arrays.asList(expected));
+//        System.out.println("Actual  : " + actual);
     }
 }

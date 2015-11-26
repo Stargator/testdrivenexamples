@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.maynard.examples.templateEngine.exceptions.MissingValueException;
 import net.maynard.examples.templateEngine.util.Config;
 
 public class Template {
@@ -45,6 +44,28 @@ public class Template {
 
         return result.toString();
     }
+
+//    private void append(String segment, StringBuilder result) {
+//        if (isVariable(segment)) {
+//            evaluateVariable(segment, result);
+//        } else {
+//            result.append(segment);
+//        }
+//    }
+//
+//    private boolean isVariable(String segment) {
+//        return segment.startsWith(varStarting) && segment.endsWith(varEnding);
+//    }
+//
+//    private void evaluateVariable(String segment, StringBuilder result) {
+//        String variable = segment.substring(varStarting.length(), segment.length() - varEnding.length());
+//
+//        if (!variables.containsKey(variable)) {
+//            throw new MissingValueException(segment);
+//        }
+//
+//        result.append(variables.get(variable));
+//    }
 
     public String getTemplateText() {
         return this.templateText;

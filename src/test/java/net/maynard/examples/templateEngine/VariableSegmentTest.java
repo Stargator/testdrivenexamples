@@ -1,12 +1,12 @@
 package net.maynard.examples.templateEngine;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import com.gargoylesoftware.base.testing.EqualsTester;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import net.maynard.examples.templateEngine.exceptions.MissingValueException;
 import org.junit.After;
 import org.junit.Before;
@@ -33,7 +33,7 @@ public class VariableSegmentTest {
 
     @Test
     public void variableEvaluatesToItsValue() throws Exception {
-        value = "myvalue";
+        String value = "myvalue";
         variables.put(name, value);
 
         assertEquals(value, new Variable(name).evaluate(variables));

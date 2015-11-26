@@ -1,6 +1,0 @@
-/.gradle/
-/.idea
-/.nb-gradle/
-/build
-/testdrivenexamples.iml
-/src/main/java/net/maynard/examples/templateEngine/TemplateParserInProgress.java
