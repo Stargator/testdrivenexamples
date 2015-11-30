@@ -89,7 +89,7 @@ project.version = 0.3
 ext {
     encoding = "UTF-8"
     hamcrestVersion = "1.3+"
-    jdkSource = "1.7"
+    jdkSource = "1.8"
     junitVersion = "4.12+"
 }
 
