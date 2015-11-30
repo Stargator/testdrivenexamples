@@ -89,7 +89,7 @@ project.version = 0.3
 ext {
     encoding = "UTF-8"
     hamcrestVersion = "1.3+"
-    jdkSource = "1.6"
+    jdkVersion = "1.7"
     junitVersion = "4.12+"
 }
 
@@ -110,8 +110,8 @@ sourceSets {
     }
 }
 
-sourceCompatibility = jdkSource
-targetCompatibility = jdkSource
+sourceCompatibility = jdkVersion
+targetCompatibility = jdkVersion
 [compileJava, compileTestJava]*.options*.encoding = encoding
 
 // NetBeans will automatically add "run" and "debug" tasks relying on the
@@ -208,7 +208,7 @@ dependencies {
 
 task printProperties << {
     println encoding
-    println jdkSource
+    println jdkVersion
     sourceSets.matching { it.purpose == "production"}.each { println it.name}
 }
 
