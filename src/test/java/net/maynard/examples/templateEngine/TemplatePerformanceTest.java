@@ -12,7 +12,8 @@ import org.junit.Test;
 public class TemplatePerformanceTest {
 
     private Template template;
-    private final String templateText = "${one}${two}${3}${four}${5}${6}${7}${8}${9}${10}${11}${12}${13}${14}${15}${16}${17}${18}${19}${20}";
+    private final String templateText = "${one}${two}${3}${four}${5}${6}${7}${8}${9}${10}${11}${12}${13}${14}" +
+            "${15}${16}${17}${18}${19}${20}";
     private final long PERFORMANCE_TIME = 65L; // Originally wanted it at 200L, but performance was better than expected. The 
 
     // SetUp() for creating a 100 word template with 20 variables
@@ -68,7 +69,7 @@ public class TemplatePerformanceTest {
         long time = System.currentTimeMillis();
         template.evaluate();
         time = System.currentTimeMillis() - time;
-        logTime(time);
+        //logTime(time);
 
         assertTrue("Rendering template took " + time + "ms, while the target "
                 + "was " + expected + "ms", time <= expected);

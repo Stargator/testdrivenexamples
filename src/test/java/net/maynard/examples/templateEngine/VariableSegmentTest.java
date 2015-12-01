@@ -34,18 +34,18 @@ public class VariableSegmentTest {
     @Test
     public void variableEvaluatesToItsValue() throws Exception {
         String value = "myvalue";
-        variables.put(name, value);
+        variables.put(this.name, value);
 
-        assertEquals(value, new Variable(name).evaluate(variables));
+        assertEquals(value, new Variable(this.name).evaluate(this.variables));
     }
 
     @Test
     public void missingVariableRaisesException() throws Exception {
         try {
-            new Variable(name).evaluate(variables);
+            new Variable(this.name).evaluate(this.variables);
             fail("Missing variable value should raise an exception");
         } catch (MissingValueException expected) {
-            assertEquals("No value set for ${" + name + "}", expected.getMessage());
+            assertEquals("No value set for ${" + this.name + "}", expected.getMessage());
         }
     }
 

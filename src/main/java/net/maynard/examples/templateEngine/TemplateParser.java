@@ -7,11 +7,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.maynard.examples.templateEngine.util.Config;
-
 public class TemplateParser {
 
-    // TODO: Later pull these values from a property/config file
     final private String varStarting = Config.varStarting;
     final private String varEnding = Config.varEnding;
 

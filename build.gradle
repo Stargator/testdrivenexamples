@@ -136,9 +136,9 @@ repositories {
 //    maven { url "http://people.apache.org/repo/m2-incubating-repository" } //Valid, but limited
 //    maven { url "http://www.laughingpanda.org/maven2/" } //Invaliud
     mavenCentral()
-    maven {
-        url "http://repo1.maven.org/maven"
-    }
+//    maven {
+//        url "http://repo1.maven.org/maven"
+//    }
 
     // You may define additional repositories, or even remove "mavenCentral()".
     // Read more about repositories here:

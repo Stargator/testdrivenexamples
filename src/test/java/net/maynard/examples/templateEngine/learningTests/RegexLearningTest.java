@@ -12,10 +12,6 @@ import java.util.regex.Pattern;
 import net.maynard.examples.templateEngine.Template;
 import org.junit.Test;
 
-/**
- *
- * @author root
- */
 public class RegexLearningTest {
 
     private Template template;
@@ -80,24 +76,23 @@ public class RegexLearningTest {
     @Test
     public void learningTest() {
         template = new Template("${one}, ${two}, ${three}");
-//        System.out.println("Template; " + template.getTemplateText());
-//        System.out.println("Variables: " + template.getVariables());
-//        System.out.println();
+        System.out.println("Template; " + template.getTemplateText());
+        System.out.println();
 
         template.set("one", "one");
-//        System.out.println("Template; " + template.getTemplateText());
-//        System.out.println("one");
-//        System.out.println();
+        System.out.println("Template; " + template.getTemplateText());
+        System.out.println("one");
+        System.out.println();
 
         template.set("two", "{two}");
-//        System.out.println("Template; " + template.getTemplateText());
-//        System.out.println("two");
-//        System.out.println();
-//
+        System.out.println("Template; " + template.getTemplateText());
+        System.out.println("two");
+        System.out.println();
+
         template.set("three", "$three");
-//        System.out.println("Template; " + template.getTemplateText());
-//        System.out.println("three");
-//        System.out.println();
+        System.out.println("Template; " + template.getTemplateText());
+        System.out.println("three");
+        System.out.println();
 
         assertTemplateEvaluatesTo("one, {two}, $three");
     }
