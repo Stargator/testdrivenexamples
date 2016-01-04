@@ -12,7 +12,6 @@ public class TemplateParser {
     final private String varStarting = Config.varStarting;
     final private String varEnding = Config.varEnding;
 
-    //Original
     private List<String> parse(String template) {
         List<String> segments = new ArrayList<>();
         int index = collectSegments(segments, template);
@@ -22,23 +21,6 @@ public class TemplateParser {
 
         return segments;
     }
-
-//    public List<Segment> parseSegments(String template) {
-//        List<Segment> segments = new ArrayList<>();
-//        collectSegments(segments, template);
-//
-//        return segments;
-//    }
-
-//    public List<Segment> parseSegments(String template) {
-//        List<Segment> segments = new ArrayList<>();
-//        int index = collectSegments(segments, template);
-//
-//        addTail(segments, template, index);
-//        addEmptyStringIfTemplateWasEmpty(segments);
-//
-//        return segments;
-//    }
 
     private int collectSegments(List<String> segments, String template) {
         Pattern pattern = Pattern.compile("\\$\\{[^}]*\\}");

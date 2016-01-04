@@ -15,11 +15,11 @@ cache:
     - $HOME/.gradle/wrapper/
 
 #install: true # You can skip the installation step entirely
-# before_install:
-# install:
+before_install: scripts/pre_install.sh
+install: gradle check --stacktrace
 
-before_script: gradle assemble --stacktrace
-script: gradle check --stacktrace
+# before_script:
+# script:
 
 # In both after_failure and after_success, you can access the build result using the $TRAVIS_TEST_RESULT environment variable.
 # after_success:

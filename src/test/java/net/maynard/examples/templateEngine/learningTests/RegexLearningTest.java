@@ -3,7 +3,7 @@ package net.maynard.examples.templateEngine.learningTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.CoreMatchers.not;
 import static net.maynard.examples.templateEngine.util.HamcrestAddon.assertThat;
 
 import java.util.regex.Matcher;
