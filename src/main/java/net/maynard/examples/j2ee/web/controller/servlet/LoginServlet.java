@@ -1,6 +1,6 @@
 package net.maynard.examples.j2ee.web.controller.servlet;
 
-import net.maynard.examples.j2ee.web.controller.service.AuthenticationService;
+import net.maynard.examples.j2ee.web.controller.authenticator.AuthenticationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

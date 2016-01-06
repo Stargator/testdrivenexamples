@@ -2,8 +2,8 @@ package net.maynard.examples.j2ee.web.controller.servlet;
 
 import static org.junit.Assert.assertEquals;
 
-import net.maynard.examples.j2ee.web.controller.service.AuthenticationService;
-import net.maynard.examples.j2ee.web.controller.service.FakeAuthenticationService;
+import net.maynard.examples.j2ee.web.controller.authenticator.AuthenticationService;
+import net.maynard.examples.j2ee.web.controller.authenticator.FakeAuthenticationService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;

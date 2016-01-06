@@ -1,4 +1,4 @@
-package net.maynard.examples.j2ee.web.controller.service;
+package net.maynard.examples.j2ee.web.controller.authenticator;
 
 import java.util.HashMap;
 import java.util.Map;
