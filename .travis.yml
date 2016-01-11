@@ -16,7 +16,9 @@ cache:
     - $HOME/.gradle/wrapper/
 
 #install: true # You can skip the installation step entirely
-before_install: scripts/pre_install.sh
+before_install:
+  - apt-get install gradle
+  - gradle assemble --stacktrace
 install: gradle check --stacktrace
 
 # before_script:
