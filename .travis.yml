@@ -5,6 +5,7 @@ jdk:
   - oraclejdk7
   - openjdk7
 
+sudo: required
 #env: #Environment Variables
 
 before_cache:
