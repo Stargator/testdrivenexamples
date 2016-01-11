@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 
-
-#apt-get
+echo "Gradle Build"
 gradle assemble --stacktrace
