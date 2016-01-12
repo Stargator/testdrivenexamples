@@ -3,7 +3,6 @@ language: java
 jdk:
   - oraclejdk8
   - oraclejdk7
-  - openjdk8
   - openjdk7
 
 #env: #Environment Variables
@@ -16,11 +15,11 @@ cache:
     - $HOME/.gradle/wrapper/
 
 #install: true # You can skip the installation step entirely
-before_install: gradle assemble --stacktrace
-install: gradle check --stacktrace
+#before_install:
+#install:
 
-# before_script:
-# script:
+before_script: gradle assemble --stacktrace
+script: gradle clean assemble check --stacktrace
 
 # In both after_failure and after_success, you can access the build result using the $TRAVIS_TEST_RESULT environment variable.
 # after_success:
