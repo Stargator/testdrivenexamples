@@ -5,7 +5,6 @@ jdk:
   - oraclejdk7
   - openjdk7
 
-sudo: required
 #env: #Environment Variables
 
 before_cache:
@@ -16,9 +15,8 @@ cache:
     - $HOME/.gradle/wrapper/
 
 #install: true # You can skip the installation step entirely
-before_install:
-  - sudo gradle assemble --stacktrace
-install: sudo gradle check --stacktrace
+before_install: gradle assemble --stacktrace
+install: gradle check --stacktrace
 
 # before_script:
 # script:
