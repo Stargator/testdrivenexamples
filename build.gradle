@@ -89,7 +89,8 @@ project.version = '0.3'
 ext {
     encoding = "UTF-8"
     hamcrestVersion = "1.3+"
-    jdkVersion = "1.8"
+    targetJdkVersion = "1.8"
+    sourceJdkVersion = "1.7"
 }
 
 printInfo()
@@ -109,8 +110,8 @@ sourceSets {
     }
 }
 
-sourceCompatibility = jdkVersion
-targetCompatibility = jdkVersion
+sourceCompatibility = sourceJdkVersion
+targetCompatibility = targetJdkVersion
 [compileJava, compileTestJava]*.options*.encoding = encoding
 
 // You may however define the property prior executing
