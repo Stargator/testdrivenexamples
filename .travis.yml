@@ -16,7 +16,6 @@ cache:
 
 #install: true # You can skip the installation step entirely
 before_install: gradle assemble --stacktrace
-install: gradle check --stacktrace
 
 # before_script:
 # script:
