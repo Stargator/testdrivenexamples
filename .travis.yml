@@ -17,7 +17,6 @@ cache:
 
 #install: true # You can skip the installation step entirely
 before_install:
-  - sudo apt-get install gradle
   - sudo gradle assemble --stacktrace
 install: sudo gradle check --stacktrace
 
