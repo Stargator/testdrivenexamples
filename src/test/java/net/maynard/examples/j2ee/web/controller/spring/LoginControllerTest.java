@@ -13,7 +13,6 @@ public class LoginControllerTest {
 
     private final String CORRECT_PASSWORD = "correctpassword";
     private final String VALID_USERNAME = "validuser";
-    private final String WRONG_PASSWORD = "nosuchpassword";
 
     private FakeAuthenticationService mock;
     private MockHttpServletRequest request;
@@ -35,7 +34,9 @@ public class LoginControllerTest {
     @Test
     public void wrongPasswordShouldRedirectToErrorPage()
             throws Exception {
-        request.addParameter("j_password", WRONG_PASSWORD);
+        String wrongPassword = "nosuchpassword";
+
+        request.addParameter("j_password", wrongPassword);
         mock.addUser(VALID_USERNAME, CORRECT_PASSWORD);
 
         loginController.setAuthenticationService(mock);
