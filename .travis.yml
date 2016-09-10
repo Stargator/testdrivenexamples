@@ -9,6 +9,8 @@ jdk:
 
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
 cache:
   directories:
     - $HOME/.gradle/caches/
@@ -18,8 +20,15 @@ cache:
 #before_install:
 #install:
 
-before_script: gradle assemble --stacktrace
-script: gradle clean assemble check --stacktrace
+before_script:
+ - java -version
+ - gradle -version
+ - gradle wrapper
+ - echo "Prevent './gradlew assemble' from being executed."
+ - ./gradlew -version
+ - ./gradlew clean assemble --stacktrace
+
+script: ./gradlew clean assemble check --stacktrace
 
 # In both after_failure and after_success, you can access the build result using the $TRAVIS_TEST_RESULT environment variable.
 # after_success:
