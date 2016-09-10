@@ -1,0 +1,41 @@
+language: java
+
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk7
+
+#env: #Environment Variables
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+#install: true # You can skip the installation step entirely
+#before_install:
+#install:
+
+before_script:
+ - java -version
+ - gradle -version
+ - gradle wrapper
+ - echo "Prevent './gradlew assemble' from being executed."
+ - ./gradlew -version
+ - ./gradlew clean assemble --stacktrace
+
+script: ./gradlew clean assemble check --stacktrace
+
+# In both after_failure and after_success, you can access the build result using the $TRAVIS_TEST_RESULT environment variable.
+# after_success:
+# after_failure:
+
+# before_deploy: #OPTIONAL
+# deploy: #OPTIONAL
+# after_deploy: #OPTIONAL
+
+# after_script:

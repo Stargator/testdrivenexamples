@@ -1,0 +1,18 @@
+* text=auto
+
+# The above will handle all files NOT found below
+#
+# These files are text and should be normalized (Convert crlf => lf)
+*.less          text
+*.html          text
+*.java          text
+*.js            text
+*.json          text
+
+# These files are binary and should be left untouched
+*.class         binary
+*.gif           binary
+*.jar           binary
+*.jpg           binary
+*.jpeg          binary
+*.png           binary

@@ -1,2 +1,6 @@
-/.gradle/
-/.nb-gradle/
+.gradle/
+build/
+target/
+gradlew
+gradlew.bat
+gradle-wrapper.jar
