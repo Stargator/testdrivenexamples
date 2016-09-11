@@ -6,6 +6,7 @@ Chapter 1:
 
 Chapter 2:
  * Beginning TDD
+ * Note: Deliberately ends with one test failing. That failing test will be addressed in Chapter 3
 
 Chapter 3:
  * Refactoring in small steps
