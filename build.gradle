@@ -1,0 +1,165 @@
+
+// Apply third-party plugins
+plugins {
+    id 'com.github.ksoichiro.console.reporter' version '0.4.0'
+    id 'net.saliman.cobertura' version '2.3.2'
+}
+
+apply plugin: 'java' // Adds Java compilation, testing and bundling capabilities to a project. It serves as the basis for many of the other Gradle plugins. See also Chapter 7, Java Quickstart.
+                     // Auto applies java-base
+
+// Integration plugins
+apply plugin: 'project-report' // Generates reports containing useful information about your Gradle build.
+                               // Auto applies reporting-base
+
+// Base Plugins
+apply plugin: 'base' // Adds the standard lifecycle tasks and configures reasonable defaults for the archive tasks:
+                     // adds build ConfigurationName tasks. Those tasks assemble the artifacts belonging to the specified configuration.
+                     // adds upload ConfigurationName tasks. Those tasks assemble and upload the artifacts belonging to the specified configuration.
+                     // configures reasonable default values for all archive tasks (e.g. tasks that inherit from AbstractArchiveTask). For example, the archive tasks are tasks of types: Jar, Tar, Zip. Specifically, destinationDir, baseName and version properties of the archive tasks are preconfigured with defaults. This is extremely useful because it drives consistency across projects; the consistency regarding naming conventions of archives and their location after the build completed.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Project Details
+project.description = "This project is developed as progress is made reading through the Test-Driven book by Lasse Koskela."
+project.group = "com.tddinaction"
+project.version = '0.1'
+
+ext {
+    encoding = "UTF-8"
+}
+
+printInfo()
+
+sourceSets.all { ext.purpose = null }
+
+sourceSets {
+    main {
+        purpose = "development"
+    }
+    test {
+        purpose = "test"
+    }
+}
+
+[compileJava, compileTestJava]*.options*.encoding = encoding
+
+// You may however define the property prior to executing
+// tasks by passing a "-PmainClass=<QUALIFIED_CLASS_NAME>" argument.
+//
+// You may define your own "run" and "debug" task if you prefer.
+if (!hasProperty('mainClass')) {
+    ext.mainClass = ''
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://repo1.maven.org/maven2" }
+    maven { url "http://maven.objectweb.org/maven2" }
+    maven { url "https://repository.jboss.org/nexus/content/repositories/public" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+
+    // You may define additional repositories, or even remove "mavenCentral()".
+    // Read more about repositories here:
+    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
+}
+
+dependencies {
+    // You can read more about how to add dependency here:
+    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
+}
+
+cobertura {
+    // Sets the encoding for the output file
+    coverageEncoding "UTF-8"
+}
+
+consoleReporter {
+    junit {
+        // Set this property to false if you don't need JUnit report.
+        // Default is true.
+        enabled true
+
+        // Set this property to false if you want to see console report always.
+        // Default is true.
+        reportOnFailure true
+
+        // Set this property to true if you want to see test summary.
+        // Default is false.
+        summaryEnabled true
+
+        // Set this property to true if you want to see standard output.
+        // Default is false.
+        stdoutEnabled false
+
+        // Set this property to true if you want to see standard error.
+        // Default is false.
+        stderrEnabled false
+
+        // Set this property to false if you don't need stacktrace.
+        // Default is true.
+        stacktraceEnabled false
+
+        // Set this property to false if you don't need colorized output.
+        // Default is true.
+        colorEnabled false
+
+        // Set this property to false if you don't need source code between stacktrace.
+        // Default is true.
+        partialSourceInsertionEnabled false
+    }
+
+    jacoco {
+        // Set this property to false if you don't need JaCoCo report.
+        // Default is true.
+        // Even if this is true, reporting will not work without applying jacoco plugin.
+        enabled false
+    }
+
+    cobertura {
+        // Set this property to false if you don't need Cobertura report.
+        // Default is true.
+        // Even if this is true, reporting will not work without applying stevesaliman/gradle-cobertura-plugin plugin.
+        enabled true
+
+        // Set this property to false if you want to see console report always.
+        onlyWhenCoverageTaskExecuted false
+
+        // Set this property to false if you want to see console report
+        // just after each project's cobertura task.
+        // If set to true, all reports will be shown at the end of builds.
+        // Default is true.
+        reportAfterBuildFinished true
+
+        // Set this property to true if you want to treat a lack of the minimum coverage as an build error.
+        // This property sees thresholdError property, and if the coverage has fallen below this value
+        // the plugin will throw an exception to cause a build error.
+        // Default is false.
+        // If you set this to true, you should also set thresholdError property.
+        failIfLessThanThresholdError false
+
+        // Set this property to false if you don't like this plugin automatically changing some
+        // property of cobertura plugin.
+        // If this is set to true, the plugin will set some properties of cobertura plugin
+        // to calculate coverage.
+        // Default is true.
+        autoconfigureCoverageConfig true
+
+        // Set this property to false if you don't need colorized output.
+        // Default is true. Has the side effect of display extra characters within consoles of IDEs
+        colorEnabled false
+    }
+}
+
+// Ensures the Code Coverage by Cobertura is initiated after the test task is executed
+test.finalizedBy(project.tasks.cobertura)
+
+// Methods
+void printInfo() {
+    println()
+    println "Project: " + getProject().getName()
+    println "Version: " + getProject().getVersion()
+    println "Encoding: " + encoding
+    println()
+}
