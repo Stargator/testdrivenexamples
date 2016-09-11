@@ -1,0 +1,28 @@
+* text=auto
+
+# The above will handle all files NOT found below
+#
+# These files are text and should be normalized (Convert crlf => lf)
+.gitattributes  text
+.gitignore      text
+*.css           text
+*.gradle        text
+*.groovy        text
+*.html          text
+*.java          text
+*.js            text
+*.json          text
+*.less          text
+*.md            text
+*.properties    text
+LICENSE         text
+travis.yml      text
+
+# These files are binary and should be left untouched
+*.class         binary
+*.gif           binary
+*.jar           binary
+*.jpeg          binary
+*.jpg           binary
+*.png           binary
+*.sh            binary
