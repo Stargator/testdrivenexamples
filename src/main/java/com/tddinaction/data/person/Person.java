@@ -1,67 +1,49 @@
 package com.tddinaction.data.person;
 
 public class Person {
-    private String firstname;
-    private String lastname;
-    private long id;
+
+    private Long id;
+
+    private String firstName;
+
+    private String lastName;
+
     private String ssn;
+
     private Person inLoveWith;
+
     private Person engagedWith;
 
-    public void proposeTo(Person person) {
-        if(person.acceptProposalFrom(this)) {
-            this.engagedWith = person;
-            person.engagedWith = this;
-        }
+    public Person() {
     }
 
-    private boolean acceptProposalFrom(Person person) {
-        return this.inLoveWith.equals(person);
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public boolean isEngagedWith(Person person) {
-        return person.equals(engagedWith);
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        boolean isEqual = false;
-
-        if ((object != null) && (object.getClass().equals(getClass()))) {
-            Person other = (Person) object;
-            isEqual = this.id == other.getId() && this.ssn.equals(other.getSsn())
-                    && this.firstname.equals(other.getFirstname()) && this.lastname.equals(other.getLastname());
-        }
-
-        return isEqual;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public void isInLoveWith(Person person) {
-        this.inLoveWith = person;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getFirstname() {
+        return firstName;
+    }
+
+    public void setFirstname(String name) {
+        this.firstName = name;
+    }
+
+    public String getLastname() {
+        return lastName;
+    }
+
+    public void setLastname(String name) {
+        this.lastName = name;
     }
 
     public String getSsn() {
@@ -70,5 +52,41 @@ public class Person {
 
     public void setSsn(String ssn) {
         this.ssn = ssn;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!obj.getClass().equals(getClass())) {
+            return false;
+        }
+        Person other = (Person) obj;
+        return firstName.equals(other.firstName)
+                && lastName.equals(other.lastName);
+    }
+
+    public String toString() {
+        return "{" + firstName + " " + lastName + "}";
+    }
+
+    public void proposeTo(Person beloved) {
+        if (beloved.acceptProposalFrom(this)) {
+            this.engagedWith = beloved;
+            beloved.engagedWith = this;
+        }
+    }
+
+    private boolean acceptProposalFrom(Person person) {
+        return person.equals(inLoveWith);
+    }
+
+    public void isInLoveWith(Person beloved) {
+        inLoveWith = beloved;
+    }
+
+    public boolean isEngagedWith(Person person) {
+        return person.equals(engagedWith);
     }
 }
