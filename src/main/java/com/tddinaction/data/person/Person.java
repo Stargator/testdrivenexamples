@@ -3,47 +3,34 @@ package com.tddinaction.data.person;
 public class Person {
 
     private Long id;
-
-    private String firstName;
-
-    private String lastName;
-
+    private String firstname;
+    private String lastname;
     private String ssn;
-
     private Person inLoveWith;
-
     private Person engagedWith;
 
-    public Person() {
-    }
-
-    public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public String getFirstname() {
-        return firstName;
+        return firstname;
     }
 
-    public void setFirstname(String name) {
-        this.firstName = name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLastname() {
-        return lastName;
+        return lastname;
     }
 
-    public void setLastname(String name) {
-        this.lastName = name;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getSsn() {
@@ -55,35 +42,31 @@ public class Person {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
+    public boolean equals(Object object) {
+        boolean isEqual = false;
+
+        if ((object != null) && (object.getClass().equals(getClass()))) {
+            Person other = (Person) object;
+            isEqual = this.id == other.getId() && this.ssn.equals(other.getSsn())
+                    && this.firstname.equals(other.getFirstname()) && this.lastname.equals(other.getLastname());
         }
-        if (!obj.getClass().equals(getClass())) {
-            return false;
-        }
-        Person other = (Person) obj;
-        return firstName.equals(other.firstName)
-                && lastName.equals(other.lastName);
+
+        return isEqual;
     }
 
-    public String toString() {
-        return "{" + firstName + " " + lastName + "}";
-    }
-
-    public void proposeTo(Person beloved) {
-        if (beloved.acceptProposalFrom(this)) {
-            this.engagedWith = beloved;
-            beloved.engagedWith = this;
+    public void proposeTo(Person person) {
+        if(person.acceptProposalFrom(this)) {
+            this.engagedWith = person;
+            person.engagedWith = this;
         }
     }
 
     private boolean acceptProposalFrom(Person person) {
-        return person.equals(inLoveWith);
+        return this.inLoveWith.equals(person);
     }
 
-    public void isInLoveWith(Person beloved) {
-        inLoveWith = beloved;
+    public void isInLoveWith(Person person) {
+        this.inLoveWith = person;
     }
 
     public boolean isEngagedWith(Person person) {
