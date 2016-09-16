@@ -22,4 +22,9 @@ before_script:
  - ./gradlew -version
  - ./gradlew clean assemble --stacktrace
 
-script: ./gradlew clean assemble check --stacktrace
+script:
+ - ./gradlew clean assemble check --stacktrace
+ - sonar-scanner -Dsonar.login=$SONAR_TOKEN
+
+addons:
+  sonarqube: true
